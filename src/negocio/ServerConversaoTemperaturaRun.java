@@ -6,14 +6,14 @@ public class ServerConversaoTemperaturaRun {
 	public static void main(String[] args) throws Exception {
 		
 		ServerConversaoTemperatura servico = new ServerConversaoTemperatura();
-		RegistroServidor rs = new RegistroServidor("127.0.0.1","");
+		RegistroServidor rs = new RegistroServidor("localhost","5551");
 		
 		rs.setNomeServico(servico.getClass().getSimpleName());
 		
 		ServidorNomes sn = new ServidorNomes();
 		
-		Comm m = new Comm(rs);
-		
+		Comm mCliente = new Comm(new RegistroServidor("localhost", "5000"));
+		Comm mServidor = new Comm(rs);
 		
 		Message reqMsg = new Message();
 		Message resMsg = new Message();
@@ -24,11 +24,11 @@ public class ServerConversaoTemperaturaRun {
 		reqMsg.setOperacao("adicionarServico");
 		
 		
-		m.requestAndReceive(reqMsg);
+		mCliente.requestAndReceive(reqMsg);
 		
 		
 		while (true) {
-			reqMsg = m.receive();
+			reqMsg = mServidor.receive();
 			String op = reqMsg.getOperacao();
 			switch (op) {
 			case "celsiusToFahrenheit":
@@ -36,7 +36,7 @@ public class ServerConversaoTemperaturaRun {
 				break;
 			}
 
-			m.reply(resMsg);
+			mServidor.reply(resMsg);
 
 		}
 		
