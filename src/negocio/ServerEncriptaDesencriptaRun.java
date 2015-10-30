@@ -37,7 +37,7 @@ public static void main(String[] args) throws Exception {
 				break;
 				
 			case "desencripta":
-				resMsg.setValores(servico.desencripta(reqMsg.getValores()));
+			//	resMsg.setValores(servico.desencripta(reqMsg.getValores()));
 			}
 
 			mServidor.reply(resMsg);
