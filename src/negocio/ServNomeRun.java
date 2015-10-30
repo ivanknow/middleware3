@@ -4,14 +4,14 @@ import middware.Comm;
 
 public class ServNomeRun {
 	public static void main(String[] args) throws Exception {
-
+		
 		run("localhost","5000");
 	}
-	
+	static ServidorNomes sn = new ServidorNomes();
 	public static void run(String host,String port) throws Exception{
 		Comm m = new Comm(new RegistroServidor(host, port));
 
-		ServidorNomes sn = new ServidorNomes();
+		
 		while (true) {
 			MiddlewareThread thread = new MiddlewareThread(m.receiveThread()) {
 				

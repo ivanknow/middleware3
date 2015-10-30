@@ -15,7 +15,7 @@ public class ServidorNomes {
 		servicos = new HashMap<String, List<RegistroServidor>>();
 	}
 
-	public void adicionarServico(RegistroServidor service) 
+	public synchronized void adicionarServico(RegistroServidor service) 
 	{System.out.println(service);
 		if (servicos.containsKey(service.getNomeServico())) 
 		{
@@ -32,7 +32,7 @@ public class ServidorNomes {
 		System.out.println(this);
 	}
 	
-	public RegistroServidor recuperarServico(String nome){
+	public synchronized RegistroServidor recuperarServico(String nome){
 		if (servicos.containsKey(nome)) {
 			List<RegistroServidor> list = servicos.get(nome);
 			RegistroServidor retorno =  list.get(0);
@@ -49,7 +49,7 @@ public class ServidorNomes {
 		return null;
 	}
 	
-	public String nomesServicos(){
+	public synchronized String nomesServicos(){
 		StringBuilder nomes = new StringBuilder();
 		Set<String> set = servicos.keySet();
 		for(String s:set){
