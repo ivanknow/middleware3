@@ -2,7 +2,7 @@ package interfaces;
 
 public interface IEncriptaDecripta {
 	
-	void encripta(String texto);
-	void desencripta(byte[] chave, byte[] textoEncriptado);
+	byte[] encripta(String texto);
+	String desencripta(byte[] chave, byte[] textoEncriptado);
 
 }
