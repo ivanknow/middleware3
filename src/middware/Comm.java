@@ -10,7 +10,7 @@ import negocio.Message;
 import negocio.RegistroServidor;
 
 
-public class Comm implements IComm {
+public class Comm {
 	private int port;
 	private String host;
 	ServerSocket welcomeSocket;
@@ -22,32 +22,6 @@ public class Comm implements IComm {
 		this.host = rs.getIp();
 	}
 
-	@Override
-	public void send(Message msg) throws Exception {
-		Socket clientSocket = null;
-		clientSocket = new Socket(host, port);
-		ObjectOutputStream outToServer;
-		outToServer = new ObjectOutputStream(clientSocket.getOutputStream());
-		outToServer.writeObject(msg);
-		clientSocket.close();
-		Thread.sleep(500);
-	}
-	
-	
-	
-
-	public Message receive2() throws Exception {
-		Message msg = null;
-		ServerSocket welcomeSocket = new ServerSocket(port);
-		Socket connectionSocket = welcomeSocket.accept();
-		ObjectInputStream inFromClient; 
-		inFromClient = new ObjectInputStream(connectionSocket.getInputStream());
-		msg = (Message) inFromClient.readObject();
-		welcomeSocket.close();
-		connectionSocket.close();
-		
-		return msg;
-	}
 	
 	public Message requestAndReceive(Message m) throws Exception {
 
@@ -63,11 +37,11 @@ public class Comm implements IComm {
 		inFromClient = new ObjectInputStream(clientSocket.getInputStream());
 		retorno= (Message) inFromClient.readObject();
 		clientSocket.close();
-		Thread.sleep(2);
+
 		return retorno;
 
 }
-	@Override
+
 	public Message receive() throws Exception{
 		welcomeSocket = new ServerSocket(port);
 		connectionSocket = welcomeSocket.accept();
@@ -91,4 +65,13 @@ public class Comm implements IComm {
 		Thread.sleep(2);
 	
 	}
+		
+		public Socket receiveThread() throws Exception{
+			welcomeSocket = new ServerSocket(port);
+			Socket s = welcomeSocket.accept();
+			welcomeSocket.close();
+			return s;
+		}
+
+			
 }
