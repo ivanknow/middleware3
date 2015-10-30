@@ -29,9 +29,9 @@ public class ClientTest {
 		
 		reqMsg.setOperacao("desencripta");
 		reqMsg.setValores(new CrypWrap(chave, textoEncriptado));
-		CrypWrap s = (CrypWrap)server.requestAndReceive(reqMsg).getValores();
+		;
 		
-		System.out.println(s.getResult());
+		System.out.println(server.requestAndReceive(reqMsg).getValores());
 		
 
 	}
