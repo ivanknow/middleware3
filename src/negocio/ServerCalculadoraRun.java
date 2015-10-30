@@ -6,7 +6,7 @@ public class ServerCalculadoraRun {
 	public static void main(String[] args) throws Exception {
 
 		ServerCalculadora servico = new ServerCalculadora();
-		RegistroServidor rs = new RegistroServidor("localhost", "5554");
+		RegistroServidor rs = new RegistroServidor("localhost", "5544");
 
 		rs.setNomeServico(servico.getClass().getSimpleName());
 
@@ -47,7 +47,7 @@ public class ServerCalculadoraRun {
 						break;
 
 					}
-
+					System.out.println("Resultado"+((NumerosWrap)mOut.getValores()).getResult());
 					return mOut;
 				}
 			};

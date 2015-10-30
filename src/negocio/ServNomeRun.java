@@ -7,26 +7,32 @@ public class ServNomeRun {
 
 		Comm m = new Comm(new RegistroServidor("localhost", "5000"));
 
-		Message reqMsg = new Message();
-		Message resMsg = new Message();
 		ServidorNomes sn = new ServidorNomes();
 		while (true) {
-			reqMsg = m.receive();
-			String op = reqMsg.getOperacao();
-			switch (op) {
-			case "nomesServicos":
-				resMsg.setValores(sn.nomesServicos());
-				break;
-			case "recuperarServico":
-				resMsg.setValores(sn.recuperarServico((String)reqMsg.getValores()));
-				break;
-			case "adicionarServico":
-				sn.adicionarServico((RegistroServidor)reqMsg.getValores());
-				break;
-			}
-
-			m.reply(resMsg);
-
+			MiddlewareThread thread = new MiddlewareThread(m.receiveThread()) {
+				
+				@Override
+				public Message exec(Message mIn) {
+					Message mOut = new Message();
+					String op = mIn.getOperacao();
+					
+					switch (op) {
+					case "nomesServicos":
+						mOut.setValores(sn.nomesServicos());
+						break;
+					case "recuperarServico":
+						mOut.setValores(sn.recuperarServico((String)mIn.getValores()));
+						break;
+					case "adicionarServico":
+						sn.adicionarServico((RegistroServidor)mIn.getValores());
+						break;
+					}
+					
+					return mOut;
+				}
+			};
+			
+			new Thread(thread).start();
 		}
 	}
 }

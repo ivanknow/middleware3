@@ -16,7 +16,6 @@ public class ServerConversaoTemperaturaRun {
 		Comm mServidor = new Comm(rs);
 		
 		Message reqMsg = new Message();
-		Message resMsg = new Message();
 		
 		
 		reqMsg.setValores(rs);
@@ -28,16 +27,23 @@ public class ServerConversaoTemperaturaRun {
 		
 		
 		while (true) {
-			reqMsg = mServidor.receive();
-			String op = reqMsg.getOperacao();
-			switch (op) {
-			case "celsiusToFahrenheit":
-				resMsg.setValores(servico.celsiusToFahrenheit((Double)reqMsg.getValores()));
-				break;
-			}
-
-			mServidor.reply(resMsg);
-
+			MiddlewareThread thread = new MiddlewareThread(mServidor.receiveThread()) {
+				
+				@Override
+				public Message exec(Message m) {
+					Message mOut = new Message();
+					ServerConversaoTemperatura servico = new ServerConversaoTemperatura();
+					String op = reqMsg.getOperacao();
+					switch (op) {
+					case "celsiusToFahrenheit":
+						mOut.setValores(servico.celsiusToFahrenheit((Double)m.getValores()));
+						break;
+					}
+					
+					return mOut;
+				}
+			};
+			new Thread(thread).start();
 		}
 		
 	}

@@ -20,19 +20,12 @@ public class ClientTest {
 		
 		server = new Comm(rs);
 		
-		reqMsg.setOperacao("soma");
-		reqMsg.setValores(new NumerosWrap(2, 2));
+		reqMsg.setOperacao("div");
+		reqMsg.setValores(new NumerosWrap(20, 2));
 		NumerosWrap s = (NumerosWrap)server.requestAndReceive(reqMsg).getValores();
 		System.out.println(s.getResult());
 		
-		
-		
-		/*case "nomesServicos":
-				resMsg.setValores(sn.nomesServicos());
-				break;
-			case "recuperarServico":
-				resMsg.setValores(sn.recuperarServico((String)reqMsg.getValores()));
-				break;*/
+
 	}
 
 }
