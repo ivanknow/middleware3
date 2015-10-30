@@ -44,7 +44,7 @@ public class ServerEncriptaDesencriptaRun {
 						break;
 					case "desencripta":
 						CrypWrap cw = (CrypWrap) mIn.getValores();
-						mOut.setValores(servico.desencripta(cw.chave,cw.textoEncriptado));
+						mOut.setValores(servico.desencripta(cw.getChave(),cw.getTextoEncriptado()));
 						break;
 					default:
 						mOut = null;
