@@ -12,7 +12,7 @@ public class ClientTest {
 		System.out.println(server.requestAndReceive(reqMsg).getValores());
 		
 		reqMsg.setOperacao("recuperarServico");
-		reqMsg.setValores("ServerCalculadora");
+		reqMsg.setValores("ServerConversaoTemperatura");
 		
 		RegistroServidor rs = (RegistroServidor) server.requestAndReceive(reqMsg).getValores();
 		
@@ -20,10 +20,10 @@ public class ClientTest {
 		
 		server = new Comm(rs);
 		
-		reqMsg.setOperacao("div");
-		reqMsg.setValores(new NumerosWrap(20, 2));
-		NumerosWrap s = (NumerosWrap)server.requestAndReceive(reqMsg).getValores();
-		System.out.println(s.getResult());
+		reqMsg.setOperacao("celsiusToFahrenheit");
+		reqMsg.setValores(new Double(31));
+		
+		System.out.println(server.requestAndReceive(reqMsg).getValores());
 		
 
 	}

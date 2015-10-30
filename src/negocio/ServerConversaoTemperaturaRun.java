@@ -34,13 +34,14 @@ public class ServerConversaoTemperaturaRun {
 				public Message exec(Message m) {
 					Message mOut = new Message();
 					ServerConversaoTemperatura servico = new ServerConversaoTemperatura();
-					String op = reqMsg.getOperacao();
+					String op = m.getOperacao();
 					switch (op) {
 					case "celsiusToFahrenheit":
 						mOut.setValores(servico.celsiusToFahrenheit((Double) m.getValores()));
 						break;
 					default:
 						mOut = null;
+						
 					}
 
 					return mOut;
