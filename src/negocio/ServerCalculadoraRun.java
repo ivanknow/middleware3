@@ -4,9 +4,13 @@ import middware.Comm;
 
 public class ServerCalculadoraRun {
 	public static void main(String[] args) throws Exception {
+		run("localhost", "5544");
+	}
+
+	public static void run(String host, String port) throws Exception {
 
 		ServerCalculadora servico = new ServerCalculadora();
-		RegistroServidor rs = new RegistroServidor("localhost", "5544");
+		RegistroServidor rs = new RegistroServidor(host,port);
 
 		rs.setNomeServico(servico.getClass().getSimpleName());
 
@@ -49,13 +53,12 @@ public class ServerCalculadoraRun {
 						mOut = null;
 
 					}
-					System.out.println("Resultado"+((NumerosWrap)mOut.getValores()).getResult());
+					System.out.println("Resultado" + ((NumerosWrap) mOut.getValores()).getResult());
 					return mOut;
 				}
 			};
 			new Thread(thread).start();
-			
-		
+
 		}
 
 	}

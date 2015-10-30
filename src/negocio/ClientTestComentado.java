@@ -4,7 +4,7 @@ import java.net.ConnectException;
 
 import middware.Comm;
 
-public class ClientConcorrente {
+public class ClientTestComentado {
 	
 	public static void main(String[] args) throws Exception {
 		try {
@@ -37,7 +37,7 @@ public class ClientConcorrente {
 		server = new Comm(rs);
 		
 		//prepara mensagem
-		reqMsg.setOperacao("div");
+		reqMsg.setOperacao("soma");
 		reqMsg.setValores(new NumerosWrap(20, 2));
 		NumerosWrap s = (NumerosWrap)server.requestAndReceive(reqMsg).getValores();
 		

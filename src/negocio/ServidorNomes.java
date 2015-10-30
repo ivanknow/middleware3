@@ -60,7 +60,7 @@ public class ServidorNomes {
 
 	@Override
 	public String toString() {
-		return "ServidorNomes [servicos=" + servicos + "]";
+		return "ServidorNomes \n[servicos=" + servicos + "]";
 	}
 	
 	

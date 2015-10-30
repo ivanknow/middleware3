@@ -6,8 +6,13 @@ public class ServerVerificarPrimoRun {
 
 	public static void main(String[] args) throws Exception {
 
+		run("localhost", "5552");
+
+	}
+	
+	public static void run(String host,String port)throws Exception{
 		ServerVerificarPrimo servico = new ServerVerificarPrimo();
-		RegistroServidor rs = new RegistroServidor("localhost", "5552");
+		RegistroServidor rs = new RegistroServidor(host, port);
 
 		rs.setNomeServico(servico.getClass().getSimpleName());
 
@@ -40,7 +45,6 @@ public class ServerVerificarPrimoRun {
 						break;
 
 					default:
-						mOut=null;
 						break;
 					}
 					
@@ -51,7 +55,6 @@ public class ServerVerificarPrimoRun {
 			new Thread(thread).start();
 
 		}
-
 	}
 
 }

@@ -6,8 +6,12 @@ public class ServerEncriptaDesencriptaRun {
 
 	public static void main(String[] args) throws Exception {
 
+		run("localhost", "5553");
+	}
+	
+	public static void run(String host,String port)throws Exception{
 		ServerEncriptaDesencripta servico = new ServerEncriptaDesencripta();
-		RegistroServidor rs = new RegistroServidor("localhost", "5553");
+		RegistroServidor rs = new RegistroServidor(host, port);
 
 		rs.setNomeServico(servico.getClass().getSimpleName());
 

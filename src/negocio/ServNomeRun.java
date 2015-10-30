@@ -5,7 +5,11 @@ import middware.Comm;
 public class ServNomeRun {
 	public static void main(String[] args) throws Exception {
 
-		Comm m = new Comm(new RegistroServidor("localhost", "5000"));
+		run("localhost","5000");
+	}
+	
+	public static void run(String host,String port) throws Exception{
+		Comm m = new Comm(new RegistroServidor(host, port));
 
 		ServidorNomes sn = new ServidorNomes();
 		while (true) {

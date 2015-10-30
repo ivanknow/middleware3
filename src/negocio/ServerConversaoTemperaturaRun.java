@@ -4,9 +4,13 @@ import middware.Comm;
 
 public class ServerConversaoTemperaturaRun {
 	public static void main(String[] args) throws Exception {
+		run("localhost", "5551");
+	}
+
+	public static void run(String host, String port) throws Exception {
 
 		ServerConversaoTemperatura servico = new ServerConversaoTemperatura();
-		RegistroServidor rs = new RegistroServidor("localhost", "5551");
+		RegistroServidor rs = new RegistroServidor(host, port);
 
 		rs.setNomeServico(servico.getClass().getSimpleName());
 
@@ -44,6 +48,5 @@ public class ServerConversaoTemperaturaRun {
 			};
 			new Thread(thread).start();
 		}
-
 	}
 }
