@@ -5,6 +5,8 @@ import interfaces.IEncriptaDecripta;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -17,7 +19,9 @@ import javax.crypto.spec.SecretKeySpec;
 public class ServerEncriptaDesencripta implements IEncriptaDecripta {
 
 	@Override
-	public void encripta(String texto) {
+	public byte[] encripta(String texto) {
+		
+		byte[] textoEncriptado = {};
 
 		try {
 			KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
@@ -42,14 +46,17 @@ public class ServerEncriptaDesencripta implements IEncriptaDecripta {
 			System.out.println("Texto [Formato de Byte] : " + textoPuro);
 			System.out.println("Texto Puro : " + new String(textoPuro));
 			// Texto encriptado
-			byte[] textoEncriptado = cifraDES.doFinal(textoPuro);
+			textoEncriptado = cifraDES.doFinal(textoPuro);
 			System.out.println("Texto Encriptado : " + textoEncriptado);
 
 			// acrescimo
+			List<String> codificado = new ArrayList<String>();
 			for (int i = 0; i < textoEncriptado.length; i++) {
 				System.out.print((0x00FF & textoEncriptado[i]) + " ");
+				
 			}
 			System.out.println();
+			
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (InvalidKeyException e) {
@@ -62,11 +69,13 @@ public class ServerEncriptaDesencripta implements IEncriptaDecripta {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		return textoEncriptado;
 	}
 
 	@Override
-	public void desencripta(byte[] chave, byte[] textoEncriptado) {
+	public String desencripta(byte[] chave, byte[] textoEncriptado) {
+		
+		byte[] textoDecriptografado = {};
 
 		try {
 
@@ -78,7 +87,7 @@ public class ServerEncriptaDesencripta implements IEncriptaDecripta {
 			// Inicializa a cifra também para o processo de decriptação
 			cifraDES.init(Cipher.DECRYPT_MODE, chaveDESteste);
 			// Decriptografa o texto
-			byte[] textoDecriptografado = cifraDES.doFinal(textoEncriptado);
+			textoDecriptografado = cifraDES.doFinal(textoEncriptado);
 			System.out.println("Texto Decriptografado : "
 					+ new String(textoDecriptografado));
 
@@ -95,17 +104,18 @@ public class ServerEncriptaDesencripta implements IEncriptaDecripta {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return new String(textoDecriptografado);
 	}
 
 	public static void main(String[] args) {
 		ServerEncriptaDesencripta ed = new ServerEncriptaDesencripta();
-		//ed.encripta("João Paulo");
+		ed.encripta("João Paulo");
 
 		byte[] chave = { (byte)26, (byte) 157, 127, 26, (byte) 145, 93, 118,
 				(byte) 140 };
 		byte[] textoEncriptado = { (byte) 251, 32, (byte) 160, 123, 119, 34, 4,
 				(byte) 164, 7, 94, (byte) 143, (byte) 199, (byte) 225,
 				(byte) 218, (byte) 137, 45 };
-		ed.desencripta(chave, textoEncriptado);
+		//ed.desencripta(chave, textoEncriptado);
 	}
 }

@@ -23,6 +23,7 @@ public class Message implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 
 	
 	
