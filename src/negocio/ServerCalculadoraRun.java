@@ -45,6 +45,8 @@ public class ServerCalculadoraRun {
 					case "div":
 						mOut.setValores(servico.div((NumerosWrap) mIn.getValores()));
 						break;
+					default:
+						mOut = null;
 
 					}
 					System.out.println("Resultado"+((NumerosWrap)mOut.getValores()).getResult());

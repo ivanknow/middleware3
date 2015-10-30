@@ -43,6 +43,7 @@ public class ServerEncriptaDesencriptaRun {
 						mOut.setValores(servico.desencripta(cw.chave,cw.textoEncriptado));
 						break;
 					default:
+						mOut = null;
 						break;
 					}
 					return mOut;

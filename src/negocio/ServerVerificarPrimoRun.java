@@ -40,6 +40,7 @@ public class ServerVerificarPrimoRun {
 						break;
 
 					default:
+						mOut=null;
 						break;
 					}
 					

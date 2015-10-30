@@ -26,7 +26,10 @@ public class ServNomeRun {
 					case "adicionarServico":
 						sn.adicionarServico((RegistroServidor)mIn.getValores());
 						break;
+					default:
+						mOut = null;
 					}
+					
 					
 					return mOut;
 				}
