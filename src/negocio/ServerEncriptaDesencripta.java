@@ -109,7 +109,7 @@ public class ServerEncriptaDesencripta implements IEncriptaDecripta {
 
 	public static void main(String[] args) {
 		ServerEncriptaDesencripta ed = new ServerEncriptaDesencripta();
-		ed.encripta("João Paulo");
+		//ed.encripta("Plataforma de Distribuição");
 
 		byte[] chave = { (byte)26, (byte) 157, 127, 26, (byte) 145, 93, 118,
 				(byte) 140 };

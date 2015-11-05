@@ -1,38 +1,30 @@
 package negocio;
 
-import middware.Comm;
 
 public class ClientTest {
 	
+	//Antes de iniciar o teste
+	//1 - Execute a classe ServNomeRun
+	//2 - Execute os demais serviços com terminação Run.
+	//3 - O mesmo serviço pode ser executado mais de uma vez, mas a porta deve ser modificada
+	
+
 	public static void main(String[] args) throws Exception {
-		Comm server = new Comm(new RegistroServidor("localhost", "5000"));
-		Message reqMsg = new Message();
-		reqMsg.setOperacao("nomesServicos");
-		
-		System.out.println(server.requestAndReceive(reqMsg).getValores());
-		
-		reqMsg.setOperacao("recuperarServico");
-		reqMsg.setValores("ServerEncriptaDesencripta");
-		
-		RegistroServidor rs = (RegistroServidor) server.requestAndReceive(reqMsg).getValores();
-		
-		System.out.println(rs);
-		
-		server = new Comm(rs);
-		
-		byte[] chave = { (byte)26, (byte) 157, 127, 26, (byte) 145, 93, 118,
-				(byte) 140 };
-		
-		byte[] textoEncriptado = { (byte) 251, 32, (byte) 160, 123, 119, 34, 4,
-				(byte) 164, 7, 94, (byte) 143, (byte) 199, (byte) 225,
-				(byte) 218, (byte) 137, 45 };
-		
-		reqMsg.setOperacao("desencripta");
-		reqMsg.setValores(new CrypWrap(chave, textoEncriptado));
-		;
-		
-		System.out.println(server.requestAndReceive(reqMsg).getValores());
-		
+
+		byte[] chave = { (byte) 191, 35, 38, (byte) 151, (byte) 193, 11,
+				(byte) 128, (byte) 213 };
+
+		byte[] textoEncriptado = { (byte) 199, (byte) 237, (byte) 131,
+				(byte) 244, 0, 30, (byte) 157, (byte) 136, 120, (byte) 248,
+				(byte) 130, 84, 88, 29, 78, (byte) 197, 113, (byte) 225, 121,
+				94, 22, 50, 67, 127, 84, 85, (byte) 228, 23, (byte) 153,
+				(byte) 162, 81, 121 };
+
+		ClientTestComentado.testCalculadoraSoma("div", 20, 2);// Parâmetros:"soma","sub","mult","div",valor1,valor2
+		ClientTestComentado.testVerificaPrimo(4);
+		ClientTestComentado.testConversaoTempCelsiusToFahrenheit(0);
+		ClientTestComentado.encripta("texto");
+		ClientTestComentado.desencripta(chave, textoEncriptado);
 
 	}
 
